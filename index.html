@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #1c1c1c; color: white; text-align: center; padding-top: 50px; }
+        .btn { background: #0088cc; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.2rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Trivia King 👑</h1>
+    <p>The game is loading...</p>
+    <button class="btn" onclick="tg.showAlert('Coming Soon: Pay Stars to Play!')">Check Wallet</button>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Opens the app to full height
+    </script>
+</body>
+</html>
