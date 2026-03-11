@@ -1,78 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Trivia King</title>
 
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-
-.container{
-    max-width:500px;
-    margin:auto;
-    background:#1b1b1b;
-    padding:20px;
-    border-radius:10px;
-}
-
-h1{
-    color:#ffcc00;
-}
-
-#question{
-    font-size:20px;
-    margin:20px 0;
-}
-
-.answer{
-    display:block;
-    background:#222;
-    padding:12px;
-    margin:10px 0;
-    border-radius:6px;
-    cursor:pointer;
-    border:1px solid #444;
-}
-
-.answer:hover{
-    background:#333;
-}
-
-.correct{
-    background:green;
-}
-
-.wrong{
-    background:red;
-}
-
-#timer{
-    font-size:18px;
-    margin-top:10px;
-}
-
-#score{
-    font-size:22px;
-    margin-top:20px;
-}
-
-button{
-    padding:12px 20px;
-    margin-top:20px;
-    border:none;
-    border-radius:6px;
-    background:#ffcc00;
-    font-weight:bold;
-    cursor:pointer;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -80,155 +16,43 @@ button{
 
 <div class="container">
 
-<h1>Trivia King</h1>
+<h1>👑 Trivia King</h1>
 
-<div id="timer">Time: 15</div>
+<div id="start-screen">
+
+<input id="username" placeholder="Enter username">
+
+<button id="startBtn">Start Game</button>
+
+</div>
+
+
+<div id="game-screen" class="hidden">
+
+<div id="timer"></div>
 
 <div id="question"></div>
 
 <div id="answers"></div>
 
-<div id="score"></div>
+</div>
 
-<button onclick="startGame()">Start Game</button>
+
+<div id="result-screen" class="hidden">
+
+<h2>Game Over</h2>
+
+<p id="score"></p>
+
+<button onclick="restartGame()">Play Again</button>
 
 </div>
 
-<script>
+</div>
 
-const questions = [
-
-{
-question:"What planet is known as the Red Planet?",
-answers:["Earth","Mars","Venus","Jupiter"],
-correct:1
-},
-
-{
-question:"Who invented the telephone?",
-answers:["Albert Einstein","Alexander Graham Bell","Isaac Newton","Nikola Tesla"],
-correct:1
-},
-
-{
-question:"What is the capital of Nigeria?",
-answers:["Abuja","Lagos","Kano","Ibadan"],
-correct:0
-},
-
-{
-question:"How many continents are there?",
-answers:["5","6","7","8"],
-correct:2
-},
-
-{
-question:"What gas do humans breathe in to survive?",
-answers:["Carbon Dioxide","Oxygen","Nitrogen","Hydrogen"],
-correct:1
-}
-
-];
-
-let currentQuestion = 0;
-let score = 0;
-let time = 15;
-let timer;
-
-function startGame(){
-
-score = 0;
-currentQuestion = 0;
-document.getElementById("score").innerHTML="";
-showQuestion();
-
-}
-
-function showQuestion(){
-
-clearInterval(timer);
-time = 15;
-
-document.getElementById("timer").innerHTML="Time: "+time;
-
-timer = setInterval(function(){
-
-time--;
-document.getElementById("timer").innerHTML="Time: "+time;
-
-if(time<=0){
-nextQuestion();
-}
-
-},1000);
-
-const q = questions[currentQuestion];
-
-document.getElementById("question").innerHTML = q.question;
-
-const answersDiv = document.getElementById("answers");
-
-answersDiv.innerHTML="";
-
-q.answers.forEach((answer,index)=>{
-
-const button = document.createElement("div");
-
-button.classList.add("answer");
-
-button.innerText = answer;
-
-button.onclick = ()=>checkAnswer(index);
-
-answersDiv.appendChild(button);
-
-});
-
-}
-
-function checkAnswer(index){
-
-const correct = questions[currentQuestion].correct;
-
-if(index===correct){
-
-score +=10;
-
-}
-
-nextQuestion();
-
-}
-
-function nextQuestion(){
-
-currentQuestion++;
-
-if(currentQuestion < questions.length){
-
-showQuestion();
-
-}else{
-
-endGame();
-
-}
-
-}
-
-function endGame(){
-
-clearInterval(timer);
-
-document.getElementById("question").innerHTML="Game Over";
-
-document.getElementById("answers").innerHTML="";
-
-document.getElementById("score").innerHTML="Your Score: "+score;
-
-}
-
-</script>
+<script src="questions.js"></script>
+<script src="app.js"></script>
 
 </body>
+
 </html>
